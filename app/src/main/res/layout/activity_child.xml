@@ -11,6 +11,30 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_display"
         android:textSize="30sp"
-        android:text="This is default text. Hopefully it changes"/>
+        android:text="This is default text. Hopefully it changes"
+        android:layout_marginBottom="97dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_display2"
+        android:textSize="30sp"
+        android:text="This is default text. Hopefully it changes"
+        android:layout_above="@+id/tv_display"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="32dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp"
+        app:srcCompat="@mipmap/ic_launcher" />
 
 </RelativeLayout>

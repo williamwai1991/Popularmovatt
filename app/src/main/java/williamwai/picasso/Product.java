@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private String price;
 
-    public Product(String image) {
+    public Product(String image, String name, String price) {
         this.image = image;
         this.name = name;
         this.price = price;

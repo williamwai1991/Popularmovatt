@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,7 +24,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Product> arrayList;
+    ArrayAdapter<String> arrayAdapter;
     GridView gV;
+    ImageView imgclick;
     static String API_KEY = "d057b296ebaefbc4ae7d79b8dbb0b6aa";
 
     @Override
@@ -31,18 +35,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         arrayList = new ArrayList<>();
         gV = (GridView) findViewById(R.id.gridView);
+        imgclick = (ImageView) findViewById(R.id.imageViewProduct);
 
-        gV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-                Context context = MainActivity.this;
-                Class destinationActivity = ChildActivity.class;
-                Intent startChildActivityIntent = new Intent(context, destinationActivity);
-                startActivity(startChildActivityIntent);
-
-            }
-        });
 
         runOnUiThread(new Runnable() {
             @Override
@@ -69,9 +64,31 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject resultObject = jsonArray.getJSONObject(i);
                     arrayList.add(new Product(
-                            resultObject.getString("poster_path")
+                            resultObject.getString("poster_path"),
+                            resultObject.getString("original_title"),
+                            resultObject.getString("popularity")
+
                     ));
 
+                    final String resultObjectString = resultObject.getString("original_title");
+                    final String resultObjectString2 = resultObject.getString("popularity");
+
+
+                    gV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                            Context context = MainActivity.this;
+                            Class destinationActivity = ChildActivity.class;
+                            Intent startChildActivityIntent = new Intent(context, destinationActivity);
+                            startChildActivityIntent.putExtra(Intent.EXTRA_TEXT, resultObjectString.toString());
+
+                            startActivity(startChildActivityIntent);
+
+                        }
+
+
+                    });
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
